@@ -2,17 +2,17 @@ package src.main.java;
 
 public class DuplicateFinder implements IDuplicateFinder {
     @Override
-    public Iterable<?> GetCandidates(String folderPath) {
+    public Iterable<IDuplicate> GetCandidates(String folderPath) {
         return null;
     }
 
     @Override
-    public Iterable<?> GetCandidates(String folderPath, CompareMode mode) {
+    public Iterable<IDuplicate> GetCandidates(String folderPath, CompareMode mode) {
         return null;
     }
 
     @Override
-    public Iterable<?> CheckCandidates(Iterable<?> candidates) {
+    public Iterable<IDuplicate> CheckCandidates(Iterable<IDuplicate> candidates) {
         return null;
     }
 }
