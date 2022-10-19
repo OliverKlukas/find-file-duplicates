@@ -55,23 +55,22 @@ public class DuplicateFinder implements IDuplicateFinder {
                     // Check if file needs to be added to already existing duplicate list.
                     int index = -1;
                     for(IDuplicate candidate : candidates){
-                        if(((ArrayList<String>) candidate.FilePaths()).contains(existingValue)){
+                        if(((Duplicate) candidate).contains(existingValue)){
                             index = candidates.indexOf(candidate);
                             break;
                         }
                     }
                     if(index >= 0){
-                        // Add to existing duplicate list.
-                        ArrayList<String> candidate = (ArrayList<String>) candidates.get(index).FilePaths();
+                        // Overwrite existing duplicate list.
+                        Duplicate candidate = (Duplicate) candidates.get(index);
                         candidate.add(value);
-                        candidates.set(index, new Duplicate(candidate));
+                        candidates.set(index, candidate);
                     } else {
                         // Create new duplicate list.
-                        ArrayList<String> candidate = new ArrayList<>();
+                        Duplicate candidate = new Duplicate();
                         candidate.add(existingValue);
                         candidate.add(value);
-                        candidates.add(new Duplicate(candidate));
-
+                        candidates.add(candidate);
                     }
                 }
             });
