@@ -14,7 +14,7 @@ public interface IDuplicateFinder {
     /**
      * Compares files for equality based on specified comparison mode.
      *
-     * <p>Walks through all files in the specified folder path and compares based comparison mode that may be file size, file name or both.
+     * <p>Walks through all files in the specified folder path and compares based comparison mode that may be file size, file name or both. TODO: specify with my implementation idea
      *
      * @param folderPath - Path in which to be compared files lay.
      * @param mode       - Comparison mode for files.
@@ -25,7 +25,7 @@ public interface IDuplicateFinder {
     /**
      * Checks files for their effective equality.
      *
-     * <p>Utilizes a MD5 hash based comparison of files.
+     * <p>Utilizes a MD5 hash based comparison of files. TODO: specify with my impementation idea
      *
      * @param candidates - Iterable list of candidate files that appear to be identical.
      * @return Returns the actual duplicates as a list.
