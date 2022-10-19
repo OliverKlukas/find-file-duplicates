@@ -84,6 +84,9 @@ public class DuplicateFinder implements IDuplicateFinder {
 
     @Override
     public Iterable<IDuplicate> CheckCandidates(Iterable<IDuplicate> candidates) {
+        // List of verified duplicates.
+        ArrayList<IDuplicate> duplicates = new ArrayList<>();
+
         // Check each candidate list separately for duplicates.
         for(IDuplicate candidate : candidates){
             ArrayList<String> checksums = new ArrayList<>();
@@ -107,25 +110,37 @@ public class DuplicateFinder implements IDuplicateFinder {
                 }
             }
 
-            // Compare checksums of files to each other.
+            // Compare checksums of files to each other and add to real duplicate instance. // TODO: very inefficient way of doing this.
+            Duplicate duplicate = new Duplicate();
+            for(int i=0; i<checksums.size(); i++){
+                for(int j=0; j<checksums.size(); j++){
+                    if(i!=j && checksums.get(i).equalsIgnoreCase(checksums.get(j))){
+                        if(!duplicate.contains(((Duplicate) candidate).get(i))){
+                            duplicate.add(((Duplicate) candidate).get(i));
+                        }
+                        if(!duplicate.contains(((Duplicate) candidate).get(j))){
+                            duplicate.add(((Duplicate) candidate).get(j));
+                        }
+                    }
+                }
+            }
+
+            // Add real duplicate to duplicate list.
+            if(!duplicate.FilePaths().isEmpty()){
+                duplicates.add(duplicate);
+            }
         }
-
-        // Check for every duplicate list if files are identical.
-
-        // Remove not identical files.
-
-        // Check for empty duplicate lists.
-
-        // Return cleaned candidate list.
-        return candidates;
+        return duplicates;
     }
 
     public static void main(String[] args){
         DuplicateFinder finder = new DuplicateFinder();
 
+        System.out.println("CANDIDATES:");
         Iterable<IDuplicate> candidates = finder.GetCandidates("./src", CompareMode.Name);
         candidates.forEach(candidate -> System.out.println(candidate.FilePaths()));
 
+        System.out.println("\nDUPLICATES:");
         Iterable<IDuplicate> duplicates = finder.CheckCandidates(candidates);
         duplicates.forEach(duplicate -> System.out.println(duplicate.FilePaths()));
     }
