@@ -1,12 +1,12 @@
 package src.main.java;
 
 import java.io.IOException;
-import java.lang.reflect.Array;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class DuplicateFinder implements IDuplicateFinder {
@@ -48,13 +48,31 @@ public class DuplicateFinder implements IDuplicateFinder {
                 }
                 String value = path.toString();
 
-                // Add (key, value) pair to identifier and utilizes HashMap.put() return value to identify duplicates.
+                // Check if file might qualify as candidate based on already traversed files.
                 String existingValue = identifier.put(key, value);
                 if(existingValue != null){
-                    ArrayList<String> candidate = new ArrayList<>();
-                    candidate.add(existingValue);
-                    candidate.add(value);
-                    candidates.add(new Duplicate(candidate));
+
+                    // Check if file needs to be added to already existing duplicate list.
+                    int index = -1;
+                    for(IDuplicate candidate : candidates){
+                        if(((ArrayList<String>) candidate.FilePaths()).contains(existingValue)){
+                            index = candidates.indexOf(candidate);
+                            break;
+                        }
+                    }
+                    if(index >= 0){
+                        // Add to existing duplicate list.
+                        ArrayList<String> candidate = (ArrayList<String>) candidates.get(index).FilePaths();
+                        candidate.add(value);
+                        candidates.set(index, new Duplicate(candidate));
+                    } else {
+                        // Create new duplicate list.
+                        ArrayList<String> candidate = new ArrayList<>();
+                        candidate.add(existingValue);
+                        candidate.add(value);
+                        candidates.add(new Duplicate(candidate));
+
+                    }
                 }
             });
         } catch (IOException e) {
