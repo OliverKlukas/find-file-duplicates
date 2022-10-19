@@ -1,6 +1,10 @@
 # TODO's
-- I think I need to wrap my duplicate files in a library and let my application reference or call it correctly?
-- 
+- add unit testing
+- add newer java functionality like streams instead of for loops or at least be consistent
+- add good comments or remove too verbose ones.
+- error handling needs to be unique for each case. -> make more professional
+- remove references to isar aerospace application here.
+- add a linter?
 
 # find-file-duplicates
 Hi there :wave:!
