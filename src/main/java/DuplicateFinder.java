@@ -30,7 +30,7 @@ public class DuplicateFinder implements IDuplicateFinder {
             filePaths.forEach(path -> {
                 // Build (key, value) pair based on path and mode.
                 String key;
-                switch (mode){
+                switch (mode) {
                     case Size:
                         try {
                             key = String.valueOf(Files.size(path));
@@ -52,17 +52,17 @@ public class DuplicateFinder implements IDuplicateFinder {
 
                 // Check if file might qualify as candidate based on already traversed files.
                 String existingValue = identifier.put(key, value);
-                if(existingValue != null){
+                if (existingValue != null) {
 
                     // Check if file needs to be added to already existing duplicate list.
                     int index = -1;
-                    for(IDuplicate candidate : candidates){
-                        if(((Duplicate) candidate).contains(existingValue)){
+                    for (IDuplicate candidate : candidates) {
+                        if (((Duplicate) candidate).contains(existingValue)) {
                             index = candidates.indexOf(candidate);
                             break;
                         }
                     }
-                    if(index >= 0){
+                    if (index >= 0) {
                         // Overwrite existing duplicate list.
                         Duplicate candidate = (Duplicate) candidates.get(index);
                         candidate.add(value);
@@ -88,9 +88,9 @@ public class DuplicateFinder implements IDuplicateFinder {
         ArrayList<IDuplicate> duplicates = new ArrayList<>();
 
         // Check each candidate list separately for duplicates.
-        for(IDuplicate candidate : candidates){
+        for (IDuplicate candidate : candidates) {
             ArrayList<String> checksums = new ArrayList<>();
-            for(String path : candidate.FilePaths()){
+            for (String path : candidate.FilePaths()) {
                 // Calculate MD5 checksum of file, inspired by: https://www.baeldung.com/java-md5 and https://stackoverflow.com/a/19469285/19312696
                 try {
                     MessageDigest md;
@@ -112,13 +112,13 @@ public class DuplicateFinder implements IDuplicateFinder {
 
             // Compare checksums of files to each other and add to real duplicate instance. // TODO: very inefficient way of doing this.
             Duplicate duplicate = new Duplicate();
-            for(int i=0; i<checksums.size(); i++){
-                for(int j=0; j<checksums.size(); j++){
-                    if(i!=j && checksums.get(i).equalsIgnoreCase(checksums.get(j))){
-                        if(!duplicate.contains(((Duplicate) candidate).get(i))){
+            for (int i = 0; i < checksums.size(); i++) {
+                for (int j = 0; j < checksums.size(); j++) {
+                    if (i != j && checksums.get(i).equalsIgnoreCase(checksums.get(j))) {
+                        if (!duplicate.contains(((Duplicate) candidate).get(i))) {
                             duplicate.add(((Duplicate) candidate).get(i));
                         }
-                        if(!duplicate.contains(((Duplicate) candidate).get(j))){
+                        if (!duplicate.contains(((Duplicate) candidate).get(j))) {
                             duplicate.add(((Duplicate) candidate).get(j));
                         }
                     }
@@ -126,24 +126,11 @@ public class DuplicateFinder implements IDuplicateFinder {
             }
 
             // Add real duplicate to duplicate list.
-            if(!duplicate.FilePaths().isEmpty()){
+            if (!duplicate.FilePaths().isEmpty()) {
                 duplicates.add(duplicate);
             }
         }
         return duplicates;
     }
-
-    public static void main(String[] args){
-        DuplicateFinder finder = new DuplicateFinder();
-
-        System.out.println("CANDIDATES:");
-        Iterable<IDuplicate> candidates = finder.GetCandidates("./src", CompareMode.Name);
-        candidates.forEach(candidate -> System.out.println(candidate.FilePaths()));
-
-        System.out.println("\nDUPLICATES:");
-        Iterable<IDuplicate> duplicates = finder.CheckCandidates(candidates);
-        duplicates.forEach(duplicate -> System.out.println(duplicate.FilePaths()));
-    }
-
 }
 

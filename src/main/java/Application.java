@@ -34,24 +34,16 @@ public class Application {
                     break;
                 case "Name":
                     mode = CompareMode.Name;
-                    break;
-                default:
-                    break;
             }
         }
 
-        /*
-        // Identify duplicates with path and mode.
+        // Identify duplicates with given path and mode.
         DuplicateFinder finder = new DuplicateFinder();
+        System.out.println("CANDIDATES:");
         Iterable<IDuplicate> candidates = finder.GetCandidates(folderPath, mode);
+        candidates.forEach(candidate -> System.out.println(candidate.FilePaths()));
+        System.out.println("\nDUPLICATES:");
         Iterable<IDuplicate> duplicates = finder.CheckCandidates(candidates);
-
-        // Display the found duplicates.
-        for (IDuplicate duplicate : duplicates){
-            for (String path : duplicate.FilePaths()){
-                System.out.print(path + "\t");
-            }
-        }*/
-
+        duplicates.forEach(duplicate -> System.out.println(duplicate.FilePaths()));
     }
 }

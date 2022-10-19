@@ -5,6 +5,9 @@
 - error handling needs to be unique for each case. -> make more professional
 - remove references to isar aerospace application here.
 - add a linter?
+- optimize code
+- add gif to repository.
+- do I need to make this whole thing a .jar? or what is a library here?
 
 # find-file-duplicates
 Hi there :wave:!
