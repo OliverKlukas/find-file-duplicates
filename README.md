@@ -1,5 +1,6 @@
 # find-file-duplicates
 Hi there :wave:!
+
 This is my implementation for the challenge set by Isar Aerospace... [TODO: finish intro text]
 
 ## Solution at a glance
@@ -23,6 +24,11 @@ mvn clean compile assembly:single
 ```
 
 ### Test commands
+```
+mvn clean test
+```
+
+### Folder structure
 ```
 TODO
 ```
