@@ -1,6 +1,4 @@
-
 import com.duplicates.CompareMode;
-import com.duplicates.Duplicate;
 import com.duplicates.DuplicateFinder;
 import com.duplicates.IDuplicate;
 import org.junit.jupiter.api.DisplayName;
@@ -8,7 +6,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class DuplicateFinderTest {
 
