@@ -1,4 +1,4 @@
-package src.main.java;
+package com.duplicates;
 
 public interface IDuplicateFinder {
     /**

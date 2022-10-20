@@ -1,4 +1,4 @@
-package src.main.java;
+package com.duplicates;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -13,12 +13,12 @@ import java.util.stream.Stream;
 
 public class DuplicateFinder implements IDuplicateFinder {
     @Override
-    public Iterable<IDuplicate> GetCandidates(String folderPath) {
+    public ArrayList<IDuplicate> GetCandidates(String folderPath) {
         return GetCandidates(folderPath, CompareMode.SizeAndName);
     }
 
     @Override
-    public Iterable<IDuplicate> GetCandidates(String folderPath, CompareMode mode) {
+    public ArrayList<IDuplicate> GetCandidates(String folderPath, CompareMode mode) {
         // Candidate list with potential Duplicates in it.
         ArrayList<IDuplicate> candidates = new ArrayList<>();
 
@@ -30,23 +30,19 @@ public class DuplicateFinder implements IDuplicateFinder {
             filePaths.forEach(path -> {
                 // Build (key, value) pair based on path and mode.
                 String key;
-                switch (mode) {
-                    case Size:
-                        try {
+                try {
+                    switch (mode) {
+                        case Size:
                             key = String.valueOf(Files.size(path));
-                        } catch (IOException e) {
-                            throw new RuntimeException(e);
-                        }
-                        break;
-                    case Name:
-                        key = String.valueOf(path.getFileName());
-                        break;
-                    default:
-                        try {
+                            break;
+                        case Name:
+                            key = String.valueOf(path.getFileName());
+                            break;
+                        default:
                             key = String.valueOf(Files.size(path)) + String.valueOf(path.getFileName());
-                        } catch (IOException e) {
-                            throw new RuntimeException(e);
-                        }
+                    }
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
                 }
                 String value = path.toString();
 
@@ -83,7 +79,7 @@ public class DuplicateFinder implements IDuplicateFinder {
     }
 
     @Override
-    public Iterable<IDuplicate> CheckCandidates(Iterable<IDuplicate> candidates) {
+    public ArrayList<IDuplicate> CheckCandidates(Iterable<IDuplicate> candidates) {
         // List of verified duplicates.
         ArrayList<IDuplicate> duplicates = new ArrayList<>();
 
