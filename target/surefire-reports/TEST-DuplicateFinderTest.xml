@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" name="DuplicateTest" time="0.033" tests="5" errors="0" skipped="0" failures="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" name="DuplicateFinderTest" time="0.015" tests="3" errors="0" skipped="0" failures="0">
   <properties>
     <property name="sun.desktop" value="gnome"/>
     <property name="awt.toolkit" value="sun.awt.X11.XToolkit"/>
@@ -57,9 +57,7 @@
     <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
     <property name="java.class.version" value="55.0"/>
   </properties>
-  <testcase name="testAdd" classname="DuplicateTest" time="0.02"/>
-  <testcase name="testFilePaths" classname="DuplicateTest" time="0.001"/>
-  <testcase name="testGetPath" classname="DuplicateTest" time="0"/>
-  <testcase name="testContains" classname="DuplicateTest" time="0"/>
-  <testcase name="testGetFileName" classname="DuplicateTest" time="0.001"/>
+  <testcase name="testGetCandidatesWithMode" classname="DuplicateFinderTest" time="0.003"/>
+  <testcase name="testCheckCandidates" classname="DuplicateFinderTest" time="0.008"/>
+  <testcase name="testGetCandidates" classname="DuplicateFinderTest" time="0.002"/>
 </testsuite>
