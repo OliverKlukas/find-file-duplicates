@@ -111,11 +111,11 @@ public class DuplicateFinder implements IDuplicateFinder {
             for (int i = 0; i < checksums.size(); i++) {
                 for (int j = 0; j < checksums.size(); j++) {
                     if (i != j && checksums.get(i).equalsIgnoreCase(checksums.get(j))) {
-                        if (!duplicate.contains(((Duplicate) candidate).get(i))) {
-                            duplicate.add(((Duplicate) candidate).get(i));
+                        if (!duplicate.contains(((Duplicate) candidate).getPath(i))) {
+                            duplicate.add(((Duplicate) candidate).getPath(i));
                         }
-                        if (!duplicate.contains(((Duplicate) candidate).get(j))) {
-                            duplicate.add(((Duplicate) candidate).get(j));
+                        if (!duplicate.contains(((Duplicate) candidate).getPath(j))) {
+                            duplicate.add(((Duplicate) candidate).getPath(j));
                         }
                     }
                 }
