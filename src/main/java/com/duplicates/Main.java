@@ -75,7 +75,7 @@ public class Main {
             }
         } while (sorting == 0);
 
-        System.out.printf("Searching for duplicate files in %s while comparing with %s...\n\n", folderPath, mode);
+        System.out.printf("Searching for duplicate files in %s...\n\n", folderPath);
 
         // Identify duplicates with given path and mode.
         DuplicateFinder finder = new DuplicateFinder();
@@ -93,31 +93,33 @@ public class Main {
         } else {
             // Sort duplicates according to desired sorting.
             int finalSorting = sorting;
-            Collections.sort(duplicates, new Comparator<IDuplicate>() {
-                @Override
-                public int compare(IDuplicate a, IDuplicate b) {
-                    switch (finalSorting){
-                        case 1:
-                            return ((Duplicate) a).getFileName().compareTo(((Duplicate) b).getFileName());
-                        case 2:
-                            return ((Duplicate) a).getFileSize().compareTo(((Duplicate) b).getFileSize());
-                        default:
-                            return ((Duplicate) a).getFileName().compareTo(((Duplicate) b).getFileName()) + ((Duplicate) a).getFileSize().compareTo(((Duplicate) b).getFileSize());
-                    }
+            duplicates.sort((a, b) -> {
+                String fileA, fileB;
+                Integer sizeA, sizeB;
+                switch (finalSorting) {
+                    case 1:
+                        fileA = ((Duplicate) a).getFileName();
+                        fileB = ((Duplicate) b).getFileName();
+                        return fileA.compareTo(fileB);
+                    case 2:
+                        sizeA = Integer.valueOf(((Duplicate) a).getFileSize());
+                        sizeB = Integer.valueOf(((Duplicate) b).getFileSize());
+                        return sizeA.compareTo(sizeB);
+                    default:
+                        fileA = ((Duplicate) a).getFileName();
+                        fileB = ((Duplicate) b).getFileName();
+                        sizeA = Integer.valueOf(((Duplicate) a).getFileSize());
+                        sizeB = Integer.valueOf(((Duplicate) b).getFileSize());
+                        return fileA.compareTo(fileB) + sizeA.compareTo(sizeB);
                 }
             });
 
 
             // Add duplicates to table.
             duplicates.forEach(duplicate -> {
-                Path examplePath = Paths.get(((Duplicate) duplicate).getPath(0));
-                try {
-                    String paths = String.valueOf(duplicate.FilePaths());
-                    paths = paths.substring(1, paths.length() - 1);
-                    at.addRow(String.valueOf(examplePath.getFileName()), Files.size(examplePath) + " bytes", paths);
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                }
+                String paths = String.valueOf(duplicate.FilePaths());
+                paths = paths.substring(1, paths.length() - 1);
+                at.addRow(((Duplicate) duplicate).getFileName(), ((Duplicate) duplicate).getFileSize() + " bytes", paths);
                 at.addRule();
             });
         }

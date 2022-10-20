@@ -106,7 +106,7 @@ public class DuplicateFinder implements IDuplicateFinder {
                 }
             }
 
-            // Compare checksums of files to each other and add to real duplicate instance. // TODO: very inefficient way of doing this.
+            // Compare checksums of files to each other and add to real duplicate instance.
             Duplicate duplicate = new Duplicate();
             for (int i = 0; i < checksums.size(); i++) {
                 for (int j = 0; j < checksums.size(); j++) {
