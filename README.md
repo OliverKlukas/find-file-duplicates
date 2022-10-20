@@ -1,14 +1,3 @@
-# TODO's
-- add unit testing
-- add newer java functionality like streams instead of for loops or at least be consistent
-- add good comments or remove too verbose ones.
-- error handling needs to be unique for each case. -> make more professional
-- remove references to isar aerospace application here.
-- add a linter?
-- optimize code
-- add gif to repository.
-- do I need to make this whole thing a .jar? or what is a library here?
-
 # find-file-duplicates
 Hi there :wave:!
 This is my implementation for the challenge set by Isar Aerospace... [TODO: finish intro text]
@@ -18,25 +7,25 @@ This is my implementation for the challenge set by Isar Aerospace... [TODO: fini
 
 ## Technical documentation
 ### Prerequisites
-- Java: 11.0.16
+- Java: ^11.0.16
+- Apache Maven: ^3.6.3
 
 ### Run commands
 ```
-TODO: include run commands
+cd find-file-duplicates
+java -jar target/find-duplicate-files-1.0-SNAPSHOT-jar-with-dependencies.jar
+```
+
+### Build commands
+```
+cd find-file-duplicates
+mvn clean compile assembly:single
+```
+
+### Test commands
+```
+TODO
 ```
 
 ### Comments
 - Developed adhering to: https://google.github.io/styleguide/javaguide.html
-
-## Challenge
-Complete these tasks:
-- Develop a library in C# that implements the interface depicted above
-- Create a console application (your choice won’t impact the evaluation) that references your library and enables the user to:
-  - Specify a folder path
-  - Run the algorithm
-  - Display the results in some way
-  - Sort the results by name and/or size
-  
-GetCandidates() should walk through all files in the directory tree and roughly compare them to each other. Default comparison mode is by file name and size. Files that appear to be identical should be returned by the method.
-
-The potential candidates should then be checked by CheckCandidates() for their effective equality by comparing their MD5 hashes. The method should return all candidates that had matching hashes as actual duplicates.
