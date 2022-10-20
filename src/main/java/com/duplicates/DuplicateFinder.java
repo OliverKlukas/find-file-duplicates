@@ -42,7 +42,7 @@ public class DuplicateFinder implements IDuplicateFinder {
                             key = String.valueOf(Files.size(path)) + String.valueOf(path.getFileName());
                     }
                 } catch (IOException e) {
-                    throw new RuntimeException(e);
+                    throw new RuntimeException(String.format("Given path %s is invalid!\n%s", path, e));
                 }
                 String value = path.toString();
 
@@ -73,7 +73,7 @@ public class DuplicateFinder implements IDuplicateFinder {
                 }
             });
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            throw new RuntimeException(String.format("Given path %s is invalid!\n%s", folderPath, e));
         }
         return candidates;
     }
@@ -99,10 +99,8 @@ public class DuplicateFinder implements IDuplicateFinder {
                     }
                     String checksum = formatter.toString();
                     checksums.add(checksum);
-                } catch (NoSuchAlgorithmException e) {
-                    throw new RuntimeException(e);
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
+                } catch (NoSuchAlgorithmException | IOException e) {
+                    throw new RuntimeException(String.format("Given path %s is invalid!\n%s", path, e));
                 }
             }
 

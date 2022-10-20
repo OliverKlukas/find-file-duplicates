@@ -4,11 +4,8 @@ import de.vandermeer.asciitable.AsciiTable;
 import de.vandermeer.asciitable.CWC_LongestWordMax;
 
 import java.io.File;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Scanner;
 
 /**
  * Console application that enables the user to find duplicate files in folder structures.
@@ -24,13 +21,13 @@ public class Main {
         File folder;
         boolean folderPathValid = false;
         System.out.println("SETTINGS:");
-        do{
+        do {
             System.out.print("Please enter a valid folder path: ");
             folderPath = scanner.nextLine();
             folder = new File(folderPath);
-            if(!(folder.exists() && folder.isDirectory())){
+            if (!(folder.exists() && folder.isDirectory())) {
                 System.out.println("Not a valid folder path!");
-            } else{
+            } else {
                 folderPathValid = true;
             }
         } while (!folderPathValid);
@@ -53,14 +50,14 @@ public class Main {
                 default:
                     System.out.println("Please only enter the desired mode number [1|2|3]!");
             }
-        } while(mode == null);
+        } while (mode == null);
 
         // Retrieve sorting of results by name and/or size.
         int sorting = 0;
         do {
             System.out.print("Do you wish to sort the results by name = 1, size = 2 or both = 3? ");
             String choice = scanner.next();
-            switch (choice){
+            switch (choice) {
                 case "1":
                     sorting = 1;
                     break;
@@ -88,7 +85,7 @@ public class Main {
         at.addRule();
         at.addRow("Name", "Size", "Paths");
         at.addRule();
-        if(duplicates.isEmpty()){
+        if (duplicates.isEmpty()) {
             at.addRow("No duplicate files were found in the given file system!");
         } else {
             // Sort duplicates according to desired sorting.
@@ -123,7 +120,7 @@ public class Main {
                 at.addRule();
             });
         }
-        at.getRenderer().setCWC(new CWC_LongestWordMax(new int[]{-1,-1,-1}));
+        at.getRenderer().setCWC(new CWC_LongestWordMax(new int[]{-1, -1, -1}));
         at.setPaddingLeftRight(1);
         System.out.println(at.render());
         scanner.close();
