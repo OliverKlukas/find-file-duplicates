@@ -1,7 +1,7 @@
 # find-file-duplicates
 Hi there :wave:
 
-This is my implementation for the challenge set by Isar Aerospace to develop an application that finds duplicate files in directory trees. My solution is written in Java and utilizes Apache Maven to package and test the application library. Please follow the stepps indicated in the technical documentation to try it for yourself!
+This is my implementation for the challenge set by Isar Aerospace to develop an application that finds duplicate files in directory trees. My solution is written in Java and utilizes Apache Maven to package and test the application library. Please follow the steps indicated in the technical documentation to try it for yourself!
 
 ## Solution at a glance
 [Screencast from 20.10.2022 20:16:20.webm](https://user-images.githubusercontent.com/39443615/197027134-6d00ff65-e84d-49e7-a938-a8f26a48ef0c.webm)
