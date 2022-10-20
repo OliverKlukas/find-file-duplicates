@@ -24,6 +24,12 @@ public class Duplicate implements IDuplicate {
         return paths.get(index);
     }
 
+    /**
+     * Retrieves file name of files in duplicate list.
+     *
+     * @throws RuntimeException in case of an empty duplicate list.
+     * @return File name as a String.
+     */
     public String getFileName() {
         if (this.paths.isEmpty()) {
             throw new RuntimeException("No file in duplicate list so far!");
@@ -31,6 +37,11 @@ public class Duplicate implements IDuplicate {
         return Paths.get(this.paths.get(0)).getFileName().toString();
     }
 
+    /**
+     * Retrieves file size of files in duplicate list.
+     *
+     * @return File size in byte as a String.
+     */
     public String getFileSize() {
         String size;
         if (this.paths.isEmpty())

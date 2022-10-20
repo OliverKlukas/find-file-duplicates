@@ -25,10 +25,9 @@ public class DuplicateFinder implements IDuplicateFinder {
         // Hashmap to identify duplicate candidates.
         HashMap<String, String> identifier = new HashMap<>();
 
-        // Build stream of all file paths through traversing given directory tree.
+        // Add all file paths to identifier hashmap through traversing given directory tree.
         try (Stream<Path> filePaths = Files.walk(Paths.get(folderPath)).filter(Files::isRegularFile)) {
             filePaths.forEach(path -> {
-                // Build (key, value) pair based on path and mode.
                 String key;
                 try {
                     switch (mode) {
@@ -49,7 +48,6 @@ public class DuplicateFinder implements IDuplicateFinder {
                 // Check if file might qualify as candidate based on already traversed files.
                 String existingValue = identifier.put(key, value);
                 if (existingValue != null) {
-
                     // Check if file needs to be added to already existing duplicate list.
                     int index = -1;
                     for (IDuplicate candidate : candidates) {
